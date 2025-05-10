@@ -2,8 +2,8 @@
 
 Este repositório contém a implementação em **linguagem C** do sistema solicitado na **Avaliação P1 - Parte 2** da disciplina **Matemática Discreta II** da Universidade de Brasília (UnB - FGA).
 
-Aluno: Vitor Feijó Leonardo
-Matrícula: 221008516
+**Aluno:** Vitor Feijó Leonardo <br>
+**Matrícula:** 221008516
 
 ## 🎯 Objetivo
 
