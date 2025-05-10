@@ -2,6 +2,9 @@
 
 Este repositório contém a implementação em **linguagem C** do sistema solicitado na **Avaliação P1 - Parte 2** da disciplina **Matemática Discreta II** da Universidade de Brasília (UnB - FGA).
 
+Aluno: Vitor Feijó Leonardo
+Matrícula: 221008516
+
 ## 🎯 Objetivo
 
 O sistema implementa um **processo matemático detalhado** para validar acessos em sistemas, aplicando conceitos de:
