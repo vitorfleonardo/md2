@@ -1,59 +1,74 @@
-# Avaliação de Matemática Discreta II - Parte 2
+# 🔐 Discrete Math II Project
 
-Este repositório contém a implementação em **linguagem C** do sistema solicitado na **Avaliação P1 - Parte 2** da disciplina **Matemática Discreta II** da Universidade de Brasília (UnB - FGA).
+This repository contains a C language implementation of a **modular arithmetic validator system**, developed as part of the **Discrete Mathematics II** course at the University of Brasília (UnB - FGA), during the first semester of 2025.
 
-**Aluno:** Vitor Feijó Leonardo <br>
-**Matrícula:** 221008516
-
-## 🎯 Objetivo
-
-O sistema implementa um **processo matemático detalhado** para validar acessos em sistemas, aplicando conceitos de:
-
-- **Congruência**
-- **Coprimalidade** e **Primalidade**
-- **Pequeno Teorema de Fermat**
-- **Teorema de Euler**
-- **Exponenciação Modular Eficiente**
-- **Função Totiente de Euler (φ(n))**
-- **Teorema da Divisão**
-
-## 🚀 Como Executar o Programa
-
-1. **Compilação**
-
-   No terminal, navegue até o diretório onde o arquivo `main.c` está salvo e execute:
-
-   ```bash
-   gcc main.c
-   ./a.out
-   ```
-
-## 🧪 Plano de Casos de Teste - Sistema de Cálculo Modular
-
-### Técnicas Aplicadas no caso de testes
-
-- **Partição de Equivalência**
-- **Análise de Valor Limite**
-- **Cobertura de Fluxo**
+📘 This project demonstrates the application of number theory concepts such as **modular arithmetic**, **coprimality**, **primality**, **modular exponentiation**, and classical theorems like **Fermat** and **Euler**, in a real algorithmic problem-solving scenario.
 
 ---
 
-| Caso   | Entrada (H, G, n, x, n1) | Caminho Esperado | Justificativa                                                  |
-| ------ | ------------------------ | ---------------- | -------------------------------------------------------------- |
-| **1**  | 10, 3, 7, 5, 7           | Fermat           | n1 é primo, verifica a aplicação do Pequeno Teorema de Fermat. |
-| **2**  | 11, 4, 9, 5, 6           | Euler            | n1 não é primo, coprimos, exige cálculo de φ(n1).              |
-| **3**  | 10, 6, 9, 5, 7           | Erro             | mdc(9, 6) ≠ 1, divisão modular não possível.                   |
-| **4**  | 13, 5, 9, 7, 7           | Fermat           | Valida caso com expoente maior para Fermat.                    |
-| **5**  | 17, 4, 9, 0, 6           | Euler            | x = 0, força análise de caso trivial (a^0 ≡ 1).                |
-| **6**  | 12, 4, 9, 5, 9           | Erro             | n1 = 9, mdc(5, 9) ≠ 1, Euler não aplicável.                    |
-| **7**  | 20, 5, 12, 8, 13         | Fermat           | n1 = 13 é primo, força cálculo maior com número primo.         |
-| **8**  | 15, 4, 9, 5, 8           | Erro             | n1 = 8, mdc(5, 8) ≠ 1, Euler não aplicável.                    |
-| **9**  | 7, 3, 7, 6, 7            | Fermat           | x = n1 - 1, testa ciclo completo de Fermat.                    |
-| **10** | 25, 7, 12, 14, 15        | Euler            | n1 = 15, φ(15) = 8, caso maior para Euler.                     |
+## Context
+
+This algorithm was built as part of an academic exam. The task was to simulate a mathematical verification mechanism for system access — a form of **mathematical security** using modular congruence checks.
+
+It combines concepts such as:
+
+- Prime verification (Euclidean Algorithm)
+- Modular inverses (Extended Euclidean Algorithm)
+- Efficient modular exponentiation
+- Fermat’s Little Theorem
+- Euler’s Theorem and Euler’s Totient Function φ(n)
+- The Division Theorem
+
+The output must show a **detailed step-by-step breakdown**, mimicking a pedagogical mathematical explanation.
 
 ---
 
-### 📌 Observações
+## What the Algorithm Does
 
-- Os **casos 3, 6 e 8** devem bloquear o fluxo na **ETAPA 1**.
-- Os demais devem seguir até as etapas de **cálculo e reescrita da expressão**.
+Given five positive integers **H, G, n, x, n1**, the program:
+
+1. Validates if G and n are coprime.
+2. Computes the **modular inverse of G mod n** using the extended Euclidean algorithm.
+3. Calculates the modular division **a = H ⊘ G in Zn**.
+4. Checks if **a and n1** are coprime.
+5. Determines whether **n1 is prime**.
+6. Depending on primality:
+   - Applies **Fermat’s Little Theorem** if prime
+   - Applies **Euler’s Theorem** otherwise
+7. Decomposes the exponent **x = q·ϕ(n1) + r**
+8. Rewrites the expression `a^x mod n1` based on that decomposition
+9. Efficiently computes the final result step-by-step, printing each operation.
+
+---
+
+## How to Compile and Run
+
+```bash
+gcc main.c
+./a.out
+```
+
+You will be prompted to enter 5 positive integers: H, G, n, x, n1
+The program will then execute and display a full breakdown of the congruence logic.
+
+---
+
+## Test Plan
+
+| Test | Inputs (H, G, n, x, n1) | Path   | Justification                 |
+| ---- | ----------------------- | ------ | ----------------------------- |
+| 1    | 10, 3, 7, 5, 7          | Fermat | n1 is prime                   |
+| 2    | 11, 4, 9, 5, 6          | Euler  | n1 not prime, a coprime to n1 |
+| 3    | 10, 6, 9, 5, 7          | Error  | G and n not coprime           |
+| 4    | 13, 5, 9, 7, 7          | Fermat | Higher exponent               |
+| 5    | 17, 4, 9, 0, 6          | Euler  | Edge case: exponent = 0       |
+| 6    | 12, 4, 9, 5, 9          | Error  | a and n1 not coprime          |
+| 7    | 20, 5, 12, 8, 13        | Fermat | Larger prime                  |
+| 8    | 15, 4, 9, 5, 8          | Error  | a and n1 not coprime          |
+| 9    | 7, 3, 7, 6, 7           | Fermat | x = n1 - 1                    |
+| 10   | 25, 7, 12, 14, 15       | Euler  | Larger φ(n1)                  |
+
+## 👤 Author
+
+Vitor Feijó Leonardo
+📍 Universidade de Brasília — FGA
