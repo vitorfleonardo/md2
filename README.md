@@ -55,18 +55,18 @@ The program will then execute and display a full breakdown of the congruence log
 
 ## Test Plan
 
-| Test | Inputs (H, G, n, x, n1) | Path   | Justification                 |
-| ---- | ----------------------- | ------ | ----------------------------- |
-| 1    | 10, 3, 7, 5, 7          | Fermat | n1 is prime                   |
-| 2    | 11, 4, 9, 5, 6          | Euler  | n1 not prime, a coprime to n1 |
-| 3    | 10, 6, 9, 5, 7          | Error  | G and n not coprime           |
-| 4    | 13, 5, 9, 7, 7          | Fermat | Higher exponent               |
-| 5    | 17, 4, 9, 0, 6          | Euler  | Edge case: exponent = 0       |
-| 6    | 12, 4, 9, 5, 9          | Error  | a and n1 not coprime          |
-| 7    | 20, 5, 12, 8, 13        | Fermat | Larger prime                  |
-| 8    | 15, 4, 9, 5, 8          | Error  | a and n1 not coprime          |
-| 9    | 7, 3, 7, 6, 7           | Fermat | x = n1 - 1                    |
-| 10   | 25, 7, 12, 14, 15       | Euler  | Larger φ(n1)                  |
+| Case   | Input (H, G, n, x, n1) | Expected Path | Justification                                                     |
+| ------ | ---------------------- | ------------- | ----------------------------------------------------------------- |
+| **1**  | 10, 3, 7, 5, 7         | Fermat        | n1 is prime, validates application of Fermat's Little Theorem.    |
+| **2**  | 11, 4, 9, 5, 6         | Euler         | n1 is not prime, numbers are coprime, requires φ(n1) calculation. |
+| **3**  | 10, 6, 9, 5, 7         | Error         | G and n are not coprime, modular division not valid.              |
+| **4**  | 13, 5, 9, 7, 7         | Fermat        | Tests larger exponent with Fermat’s Theorem.                      |
+| **5**  | 17, 4, 9, 0, 6         | Euler         | x = 0, triggers trivial case (a^0 ≡ 1 mod n1).                    |
+| **6**  | 12, 4, 9, 5, 9         | Error         | a and n1 not coprime, Euler’s Theorem cannot be applied.          |
+| **7**  | 20, 5, 12, 8, 13       | Fermat        | n1 = 13 is prime, tests with larger prime base.                   |
+| **8**  | 15, 4, 9, 5, 8         | Error         | a and n1 not coprime, Euler’s Theorem invalid.                    |
+| **9**  | 7, 3, 7, 6, 7          | Fermat        | x = n1 - 1, validates full exponent cycle in Fermat’s Theorem.    |
+| **10** | 25, 7, 12, 14, 15      | Euler         | n1 = 15, φ(15) = 8, complex Euler case with non-prime modulus.    |
 
 ## 👤 Author
 
